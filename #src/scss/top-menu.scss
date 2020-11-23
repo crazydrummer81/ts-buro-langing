@@ -1,0 +1,56 @@
+:root {
+	--header-height: calc(87px + 21px*2);
+}
+.top-menu {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	color: #ffffff;
+
+	// .top-menu__logo-img
+
+	&__logo-img {
+		height: 87px;
+		img {
+			height: 100%;
+		}
+	}
+
+	// .top-menu__logo-text
+
+	&__logo-text {
+		width: 177px;
+		margin-left: 42px;
+		font-size: 12px;
+	}
+
+	// .top-menu__items
+
+	&__items {
+		text-transform: uppercase;
+		list-style: none;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 20px;
+		margin-left: 87px;
+		width: 100%;
+
+	}
+
+	// .top-menu__item
+
+	&__item {
+	}
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 21px;
+		padding-bottom: 21px;
+	}
+}
