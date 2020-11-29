@@ -1,12 +1,20 @@
 .article-announces {
 	width: 100%;
+	position: relative;
+	background: url(../img/decor/figure-02.png) top 14% left 0% no-repeat, 
+               url(../img/decor/figure-03.png) top 80% right 0% no-repeat, 
+               url(../img/decor/figure-04.png) top 137% left 0% no-repeat;
+	//  background-size: auto, auto, cover; /* Меняем масштаб */
+	 padding-bottom: 6%;
 
 	// .article-announces__item
 
 	&__item {
 		display: flex;
 		margin-top: 30px;
-		margin-bottom: 50px;
+		&:not(:last-child) {
+			margin-bottom: 70px;
+		}
 		&:nth-child(even) .article-announces__item-text {
 			order: 1;
 			padding-right: 0;
@@ -60,10 +68,33 @@
 
 	&__item-image {
 		width: calc(50% + 55px);
+		display: flex;
 		img {
 			width: 100%;
+			min-height: 100%;
+		}
+		&::before {
+			content: "";
+			display: inline-block;
+			width: 0;
+			border-right: 1px solid yellow;
+			padding-top: 68%;
 		}
 	}
 	.container {
 	}
+
+	// &::before {
+	// 	content: "";
+	// 	position: absolute;
+	// 	top: 10%;
+	// 	left: 0;
+	// 	width: 20%;
+	// 	height: 30%;
+	// 	background-image: url(../img/decor/figure-02.png);
+	// 	background-size: contain;
+	// 	background-repeat: no-repeat;
+	// 	background-position: 0 0;
+	// 	z-index: -1;
+	// }
 }

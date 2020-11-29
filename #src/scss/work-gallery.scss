@@ -1,10 +1,19 @@
 .work-gallery {
 	margin-bottom: 95px;
+	background-image: url(../img/decor/figure-03.png), 
+							url(../img/decor/figure-06.png);
+	background-position: top -8% right 0%,
+								top 67% left 0%;
+	background-repeat: no-repeat, no-repeat;
+	background-size: 37%, 32%;
+	padding-top: 100px;
+	margin-top: -100px;
 	.container {
 		max-width: 1450px;
 		display: flex;
 		justify-content: space-between;
 	}
+
 
 	// .work-gallery__col
 

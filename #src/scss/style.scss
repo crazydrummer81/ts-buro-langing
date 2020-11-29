@@ -30,7 +30,7 @@ body {
 	padding-right: 20px;
 }
 .container.wide-padding-both {
-	max-width: 1373px;
+	// max-width: 1373px;
 	margin: auto 132px;
 }
 .container.wide-padding-left {
@@ -54,6 +54,13 @@ body {
 		display: block;
 	}
 }
+.btn-white {
+	a {
+		background-color: #fff;
+		color: var(--orange);
+		font-weight: 600;
+	}
+}
 .dropdown {
 	display: flex;
 }
@@ -67,5 +74,6 @@ body {
 @import "work-gallery";
 @import "about";
 @import "quiz-invitation-2";
+@import "contacts";
 
 

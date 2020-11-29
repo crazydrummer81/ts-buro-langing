@@ -3,6 +3,8 @@
 	display: flex;
 	align-items: center;
 	overflow: hidden;
+	position: relative;
+	overflow: visible;
 
 	// .features__item
 
@@ -66,5 +68,18 @@
 			border-right: 55px solid #000;
 			border-left: 55px solid #000;
 		}
+	}
+	&::before {
+		content: "";
+		background-image: url(../img/decor/figure-01.png);
+		position: absolute;
+		right: 0;
+		top: 23%;
+		width: 44%;
+		height: 200%;
+		overflow: visible;
+		background-size: contain;
+		background-repeat: no-repeat;
+		z-index: -1;
 	}
 }

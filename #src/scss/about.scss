@@ -1,4 +1,14 @@
 .about {
+	background-image: url(../img/decor/figure-03.png), 
+							url(../img/decor/figure-08.png);
+	background-position: top -15% right 0%,
+			bottom -150% left 0%;
+	background-repeat: no-repeat, no-repeat;
+	background-size: 37%, 32%;
+	padding-top: 50px;
+	margin-top: -100px;
+	padding-bottom: 50px;
+	margin-bottom: -50px;
 	.container {
 		max-width: 1408px;
 		margin: 65px auto;

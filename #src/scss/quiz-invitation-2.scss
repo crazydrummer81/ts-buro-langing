@@ -42,14 +42,27 @@
 			width: 100%;
 		}
 		select { 
+			appearance: none;
 			width: 100%; 
 			padding: 0 1em 0 2em;
 			font-size: 20px; font-weight: 600;
 			position: relative;
 			font-family: "Proxima Nova";
 			option {
+				font-family: "Proxima Nova";
 				font-size: 20px; font-weight: 600;
 				line-height: 1.2em;
+			}
+			a::after {
+				background: url(../img/icons/icons.svg#angle-right);
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
+				content: "";
+				width: .9em;
+				height: 1.5em;
+				position: absolute;
+				top: 0; right: 0;
 			}
 
 		}
@@ -71,21 +84,6 @@
 			width: .9em;
 			height: 1.5em;
 			margin-left: 0.6em;
-		}
-		&::before {
-			content: "";
-			background-image: url(../img/icons/icons.svg#angle-right-black);
-			background-repeat: no-repeat;
-			background-size: 80%;
-			background-position: center;
-			position: absolute;
-			left: -2em;
-			width: 1.5em;
-			height: 2em;
-			transform: rotate(90deg);
-			background-color: #fff;
-			
-
 		}
 	}
 }
