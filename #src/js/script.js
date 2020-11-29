@@ -13,6 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log('unscrolled');
 		}
 	});
+
+	const buttonModalNodes = document.querySelectorAll('a[data-target]');
+	
+	buttonModalNodes.forEach(button => {
+		button.addEventListener('click', function(e) {
+			e.preventDefault();
+			if (e.target.dataset.target === 'quiz') {
+				runQuiz();
+			}
+		});
+	});
+
+	function runQuiz() {
+		console.log('runQuiz');
+	}
 });
 
 
