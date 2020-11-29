@@ -1,0 +1,91 @@
+.quiz-invitation-2 {
+	background-color: var(--dark-grey);
+	color: #fff;
+	.container {
+		display: flex;
+		position: relative;
+	}
+	// .quiz-invitation-2__text-title
+
+	&__text {
+		font-size: 30px;
+		line-height: 1.5em;
+		width: 20%;
+		padding: 2em 1em 3em 0;
+		align-self: center;
+	}
+
+	// .quiz-invitation-2__image
+
+	&__image {
+		// height: 100%;
+		width: 30%;
+		background-image: url(../img/apartment-3d-01.png);
+		background-repeat: no-repeat;
+		background-position: left top;
+		background-size: contain;
+	}
+
+	// .quiz-invitation-2__form
+
+	&__form {
+		width: 50%;
+		align-self: center;
+		// display: flex;
+		label {
+			font-size: 20px;
+			font-weight: 900;
+			padding-bottom: 1em;
+			display: block;
+		}
+		.dropdown {
+			width: 100%;
+		}
+		select { 
+			width: 100%; 
+			padding: 0 1em 0 2em;
+			font-size: 20px; font-weight: 600;
+			position: relative;
+			font-family: "Proxima Nova";
+			option {
+				font-size: 20px; font-weight: 600;
+				line-height: 1.2em;
+			}
+
+		}
+	}
+	.button {
+		position: relative;
+		a {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 12px 30px;
+		}
+		a::after {
+			background: url(../img/icons/icons.svg#angle-right);
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			content: "";
+			width: .9em;
+			height: 1.5em;
+			margin-left: 0.6em;
+		}
+		&::before {
+			content: "";
+			background-image: url(../img/icons/icons.svg#angle-right-black);
+			background-repeat: no-repeat;
+			background-size: 80%;
+			background-position: center;
+			position: absolute;
+			left: -2em;
+			width: 1.5em;
+			height: 2em;
+			transform: rotate(90deg);
+			background-color: #fff;
+			
+
+		}
+	}
+}

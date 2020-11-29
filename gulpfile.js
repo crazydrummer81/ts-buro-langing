@@ -3,6 +3,7 @@
 // const svgSprite = require('gulp-svg-sprite');
 //! Все файлы поректа автоматом не удаляются, всё, что удаляется - в константе path.clean
 //! При изменении папки iconsprite запустить: gulp svgSprite
+//! Для добавления иконок смотрим пример в файле dist/img/stack/sprite.stack.html
 // const project_folder = require("path").basename(__dirname).replace(".loc", "");
 const project_folder = "dist";
 const source_folder = "#src";

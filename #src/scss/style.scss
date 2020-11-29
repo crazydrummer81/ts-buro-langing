@@ -10,6 +10,7 @@
 }
 
 @import "reset";
+@import "variables";
 @import "fonts";
 
 body {
@@ -23,12 +24,48 @@ body {
 	width: 100%;
 }
 .container {
-
+	margin: auto;
+	height: 100%;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 .container.wide-padding-both {
-	margin: 0 132px;
+	max-width: 1373px;
+	margin: auto 132px;
+}
+.container.wide-padding-left {
+	margin: auto 55px auto 132px;
+}
+.h2 {
+	font-size: 40px;
+	font-weight: 900;
+	text-align: center;
+	margin-bottom: 1.75em;
+}
+.button {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	a {
+		font-size: 20px;
+		padding: 20px 25px;
+		background: var(--orange);
+		color: #fff;
+		display: block;
+	}
+}
+.dropdown {
+	display: flex;
 }
 
 @import "top-menu";
 @import "hero";
+@import "features";
+@import "articles-annonces";
+@import "quiz-invitation";
+@import "project-gallery";
+@import "work-gallery";
+@import "about";
+@import "quiz-invitation-2";
+
 

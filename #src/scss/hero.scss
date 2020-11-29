@@ -1,56 +1,131 @@
 .hero {
+	justify-content: center;
 	width: 100%;
 	height: 100vh;
 	background-image: url(../img/hero-bg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: #ffffff;
+	position: relative;
+	&::before {
+		// Overlay
+		position: absolute;
+		top: 0; right: 0; bottom: 0; left: 0;
+		background-color: rgba(0,0,0,.5);
+		content: "";
+	}
 
 	// .hero__title
 
 	&__title {
+		margin-top: 18.75vh;
+		font-size: 60px;
+		font-weight: 900;
+		margin-bottom: 1em;
+		width: 74%;
 	}
 
 	// .hero__subtitle
 
 	&__subtitle {
+		font-size: 36px;
+		width: 74%;
 	}
 
 	// .hero__features
 
 	&__features {
+		position: absolute;
+		left: 20px;
+		bottom: 140px;
+		display: flex;
+		flex-direction: row;
+		width: 69%;
+		justify-content: space-between
 	}
 
 	// .hero__fatures-item
 
 	&__fatures-item {
+		font-size: 30px;
+		font-weight: 900;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		&:not(:last-child) {
+			margin-right: 5%;
+		}
+		&::after {
+			content: "";
+			width: 54px;
+			height: 3px;
+			background: var(--orange);
+			display: block;
+			margin-top: 10px;
+		}
 	}
 
 	// .hero__right-side-box
 
 	&__right-side-box {
+		position: absolute;
+		right: 0; top: 30vh;
+		width: 26%;
+		background: rgba(41,41,41,.9);
+		border-radius: 21px 0 0 21px;
+		padding: 32px 17px 40px 17px;
+		z-index: 1;
+		color: #fff;
 	}
 
 	// .hero__side-box-right-title
 
 	&__side-box-right-title {
+		font-size: 30px;
+		font-weight: 900;
+		margin-bottom: 1.5em;
 	}
 
 	// .hero__side-box-right-subtitle
 
 	&__side-box-right-subtitle {
+		font-size: 30px;
+		margin-bottom: 1.5em;
 	}
 
 	// .hero__side-box-right-items
 
 	&__side-box-right-items {
+		font-size: 20px;
 	}
 
 	// .hero__side-box-right-item
 
 	&__side-box-right-item {
+		line-height: 2.5em;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		cursor: pointer;
+		&:not(:last-child) {
+			border-bottom: 1px solid #fff;
+		}
+		img {
+			height: 100%;
+		}
+		&::after {
+			background: url(../img/icons/icons.svg#angle-right);
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			content: "";
+			width: .9em;
+			height: 1.5em;
+		}
 	}
 	.container {
 		padding-top: var(--header-height);
+		position: relative;
 	}
 }
+

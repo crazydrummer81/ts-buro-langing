@@ -1,0 +1,51 @@
+.work-gallery {
+	margin-bottom: 95px;
+	.container {
+		max-width: 1450px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	// .work-gallery__col
+
+	&__col {
+		width: 32.5%;
+		&:nth-child(1) { margin-top: 60px; }
+		&:nth-child(3) { margin-top: 90px;}
+	}
+
+	// .work-gallery__item
+
+	&__item {
+		&:not(:last-child) { margin-bottom: 116px; }
+	}
+
+	// .work-gallery__item-img
+
+	&__item-img {
+		margin-bottom: 1em;
+		img {
+			width: 100%;
+		}
+	}
+
+	// .work-gallery__item-text
+
+	&__item-text {
+		max-width: 90%;
+		text-align: center;
+		margin: 0 auto;
+		font-size: 20px;
+	}
+	&::after {
+		content: "";
+		display: block;
+		height: 23px;
+		width: 100%;
+		background-image: url(../img/primery-nashyh-interyerov/primery-nashyh-interyerov-divider.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+}
+

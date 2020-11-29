@@ -1,0 +1,74 @@
+.about {
+	.container {
+		max-width: 1408px;
+		margin: 65px auto;
+		position: relative;
+	}
+	// .about__text
+
+	&__text {
+		background: var(--dark-grey);
+		padding: 10% 10% 13% 1%;
+		color: #fff;
+		width: 50%;
+		font-size: 30px;
+		line-height: 1.5em;
+		position: relative;
+		p {
+			margin: 1.5em;
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0; left: 0;
+			width: 25%; height: 25%;
+			background-image: url(../img/decor/cube-01.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 90%;
+			height: 90%;
+			background-image: url(../img/decor/parallelepiped-01.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: right bottom;
+			transform: translate(25%, 3%);
+		}
+	}
+
+	// .about__gallery
+
+	&__gallery {
+		display: grid;
+		width: 56%;
+		grid-template-columns: repeat(2, 50%);
+		grid-gap: 2%;
+		position: absolute;
+		top: 0; right: 0;
+	}
+
+	// .about__gallery-item
+
+	&__gallery-item {
+		background: #000;
+		display: flex;
+		align-items: center; justify-content: center;
+		padding: 33%;
+
+		&::after {
+			content: "";
+			display: inline-block;
+			width: 0;
+			padding-top: 100%;
+		}
+
+	}
+
+}
+
+
