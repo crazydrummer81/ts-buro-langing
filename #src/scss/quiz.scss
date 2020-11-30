@@ -21,4 +21,13 @@
 		opacity: 1;
 		transition: .6s all ease;
 	}
+
+	.button-close {
+		position: absolute;
+		top: 130px; right: 30px;
+		width: 25px; height: 25px;
+		background-image: url(../img/icons/icons.svg#close);
+		z-index: 10;
+		cursor: pointer;
+	}
 }

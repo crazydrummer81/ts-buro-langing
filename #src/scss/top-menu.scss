@@ -9,7 +9,7 @@
 	position: fixed;
 	top: 0;
 	color: #ffffff;
-	z-index: 2;
+	z-index: 5;
 	background-color: rgba(0,0,0,0);
 	transition: all .6s ease;
 	&.scrolled {
@@ -30,10 +30,32 @@
 	// .top-menu__logo-img
 
 	&__logo-img {
+		background-image: url(../img/logo.svg);
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat;
 		width: 131px;
 		transition: all .6s ease;
+		display: flex;
+		&::before {
+			content: "";
+			width: 0;
+			padding-top: 80%;
+			display: block;
+		}
 		img {
 			width: 100%;
+		}
+	}
+
+	&.white {
+		color: #000;
+		.top-menu__logo-img {
+			background-image: url(../img/logo-black.svg);
+		}
+		a, a:visited {
+			text-decoration: none;
+			color: #000;
 		}
 	}
 

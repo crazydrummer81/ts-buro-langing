@@ -27,6 +27,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function runQuiz() {
 		console.log('runQuiz');
+		const modalNode =        document.getElementById('modal-quiz'),
+				modalContentNode = modalNode.querySelector('.modal__content'),
+				modalCloseButton = modalNode.querySelector('.button-close'),
+				topMenuNode =      document.querySelector('.top-menu');
+
+		modalCloseButton.addEventListener('click', closeModal);
+		openModal();
+
+		function openModal() {
+			document.body.classList.add('blocked');
+			modalNode.classList.add('active');
+			topMenuNode.classList.add('white');
+			topMenuNode.classList.remove('scrolled');
+		};
+		
+		function closeModal() {
+			modalNode.classList.remove('active');
+			topMenuNode.classList.remove('white');
+			topMenuNode.classList.add('scrolled');
+			document.body.classList.remove('blocked');
+		};
 	}
 });
 
