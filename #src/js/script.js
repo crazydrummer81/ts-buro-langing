@@ -2,6 +2,7 @@
 
 const quizItemsTmpl = 
 	`
+	<form id="quiz">
 	<div class="quiz-item">
 	<div class="quiz-item__title">Рассчитайте стоимость проекта Какая у Вас квартира?</div>
 	<div class="quiz-item__content">
@@ -35,8 +36,8 @@ const quizItemsTmpl =
 	<div class="quiz-item__title">Ваш телефон</div>
 	<div class="quiz-item__content">
 		<div class="phone-input-wrapper">
-			<input type="text" name="phone-code" placeholder="+7" required>
-			<input type="text" name="phone-number" placeholder="(XXX) XXX XX XX" required>
+			<input type="text" name="phone-code" class="phone" placeholder="+7" required value="+7">
+			<input type="text" name="phone-number" class="phone" placeholder="(XXX) XXX XX XX" required>
 			<div class="button disabled"><a href="#" data-step="4" data-step="4">Продолжить</a></div>
 		</div>
 	</div>
@@ -52,6 +53,7 @@ const quizItemsTmpl =
 		<div class="quiz-item__message"></div>
 	</div>
 </div>
+</form>
 	`;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -87,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				modalCloseButton = modalNode.querySelector('.button-close'),
 				topMenuNode =      document.querySelector('.top-menu');
 		let currentStep = 1;
-		setActiveStep(1);
 
 		modalCloseButton.addEventListener('click', closeModal);
 		openModal();
@@ -109,25 +110,31 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 
 		modalContentNode.innerHTML = quizItemsTmpl;
-		const modalNavWrap = modalNode.querySelector('.modal__nav');
-		modalNavWrap.addEventListener('click', function(e) {
-			e.preventDefault();
-			if (e.target.classList.contains('modal__nav-prev')) {
-				if (currentStep > 1) {
-					setActiveStep(currentStep - 1);
-				}
-			}
-			if (e.target.classList.contains('modal__nav-next')) {
-				if (currentStep < 5) {
-					setActiveStep(currentStep + 1);
-				}
-			}
-		});
+		// const modalNavWrap = modalNode.querySelector('.modal__nav');
+		// modalNavWrap.addEventListener('click', function(e) {
+		// 	e.preventDefault();
+		// 	if (e.target.classList.contains('modal__nav-prev')) {
+		// 		if (currentStep > 1) {
+		// 			setActiveStep(currentStep - 1);
+		// 		}
+		// 	}
+		// 	if (e.target.classList.contains('modal__nav-next')) {
+		// 		if (currentStep < 5) {
+		// 			setActiveStep(currentStep + 1);
+		// 		}
+		// 	}
+		// });
 
-		const stepNodes = modalContentNode.querySelectorAll('.quiz-item');
+		const stepNodes = modalContentNode.querySelectorAll('.quiz-item'),
+		      phoneInputs = modalContentNode.querySelectorAll('input.phone'),
+		      smsDigitNodes = modalContentNode.querySelectorAll('.sms-digit');
+		
+		setActiveStep(1);
+		
 		modalContentNode.addEventListener('click', function(e) {
 			e.preventDefault();
-			console.log('currentStep', currentStep);
+			// console.log('click', e.target);
+			
 			if (e.target.dataset.value) {
 				e.target.classList.toggle('selected');
 				const parentNode = e.target.closest('.quiz-item__content');
@@ -135,33 +142,54 @@ document.addEventListener('DOMContentLoaded', () => {
 				input.value = e.target.dataset.value;
 				let timerId = setTimeout(() => {
 					setActiveStep(currentStep+1);
-					currentStep += 1;
 				}, 300); 
 			};
+			
 			if (e.target.dataset.step == "3") {
 				setActiveStep(currentStep+1);
-				currentStep += 1;
 			};
+			
 			if (e.target.dataset.step == "4") {
 				
 				const parentNode = e.target.closest('.quiz-item__content');
-				const inputs = parentNode.querySelectorAll('input[type=text]');
+				
 				let isErrors = false;
-				inputs[0].classList.remove('has-error');
-				inputs[1].classList.remove('has-error');
-				if (!inputs[0].value) {
-					inputs[0].classList.add('has-error');
+				phoneInputs[0].classList.remove('has-error');
+				phoneInputs[1].classList.remove('has-error');
+				if (!phoneInputs[0].value) {
+					phoneInputs[0].classList.add('has-error');
 					isErrors = true;
 				}
-				if (!inputs[1].value) {
-					inputs[1].classList.add('has-error');
+				if (!phoneInputs[1].value) {
+					phoneInputs[1].classList.add('has-error');
 					isErrors = true;
 				}
 				if (!isErrors) {
 					setActiveStep(currentStep+1);
-					currentStep += 1;
 				}
 			};
+
+			if (e.target.dataset.step == "5") {
+				setInterval(smsDigitNodes[0].focus(), 900);
+			};
+		});
+
+		smsDigitNodes.forEach((node,i) => {
+			node.addEventListener('keypress', function(e) {
+				e.preventDefault();
+				console.log('key', e.key, 'type', typeof(e.key));
+				const digitId = +e.target.name.match(/\d/)[0];
+				console.log('digitId',digitId);
+				if (e.key.match(/\d/)) {
+					e.target.value = e.key;
+					if (digitId < smsDigitNodes.length)
+						smsDigitNodes[i+1].focus();
+					if (digitId == smsDigitNodes.length)
+						checkSms();
+				} else {
+					e.target.value = '';
+				}
+			});
 		});
 
 		function setActiveStep(step) {
@@ -170,8 +198,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (step === i+1) {item.classList.add('active')};
 			});
 			currentStep = step;
+			console.log('setActiveStep()', currentStep);
 		};
 
+		function checkSms() {
+			console.log('checkSms()');
+		};
 	}
 });
 
