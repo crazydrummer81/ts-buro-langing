@@ -20,7 +20,7 @@ body {
 	font-size: 16px;
 	margin: 0 auto;
 	overflow-x: hidden;
-	.blocked {
+	&.blocked {
 		overflow-y: hidden;
 	}
 }
@@ -50,6 +50,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	position: relative;
 	a {
 		font-size: 20px;
 		padding: 20px 25px;
