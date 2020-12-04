@@ -38,7 +38,7 @@ const quizItemsTmpl =
 		<div class="phone-input-wrapper">
 			<input type="text" name="phone-code" class="phone" placeholder="+7" required value="+7">
 			<input type="text" name="phone-number" class="phone" placeholder="(XXX) XXX XX XX" required>
-			<div class="button disabled"><a href="#" data-step="4" data-step="4">Продолжить</a></div>
+			<div class="button disabled"><a href="#" data-step="4">Продолжить</a></div>
 		</div>
 	</div>
 </div>
@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Изменение главного меню при скролле
 		// console.log('scroll', window.pageYOffset);
 		const topMenuNode = document.querySelector('.top-menu');
+		topMenuNode.classList.remove('mobile-active');
 		if (window.pageYOffset > 50 && !document.body.classList.contains('blocked')) {
 			topMenuNode.classList.add('scrolled');
 			console.log('scrolled');
@@ -70,24 +71,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	const buttonModalNodes = document.querySelectorAll('a[data-target]');
+	const buttonModalNodes = document.querySelectorAll('a[data-target]'),
+			flatTypeSelect = document.querySelector('select[name="flat-type"]');
 	
 	buttonModalNodes.forEach(button => {
 		button.addEventListener('click', function(e) {
 			e.preventDefault();
-			if (e.target.dataset.target === 'quiz') {
-				runQuiz();
-			}
+			let step = 1, roomsCount = null;
+			console.log('roomsCount', roomsCount);
+
+			if (e.target.dataset.target === 'quiz2') {
+				roomsCount = flatTypeSelect.value;
+				step = 2;
+			};
+			if (e.target.dataset.target === 'quiz4') {
+				step = 4;
+			};
+			runQuiz(step, roomsCount);
+			
 		});
 	});
 
 
-	function runQuiz() {
+	function runQuiz(step = 1, roomsCount = null) {
 		console.log('runQuiz');
 		const modalNode =        document.getElementById('modal-quiz'),
 				modalContentNode = modalNode.querySelector('.modal__content'),
 				modalCloseButton = modalNode.querySelector('.button-close'),
-				topMenuNode =      document.querySelector('.top-menu');
+				topMenuNode =      document.querySelector('.top-menu'),
+				burgerNode =       topMenuNode.querySelector('.top-menu__burger');
 		let currentStep = 1;
 
 		modalCloseButton.addEventListener('click', closeModal);
@@ -99,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.dir(topMenuNode);
 			topMenuNode.classList.remove('scrolled');
 			topMenuNode.classList.add('white');
+			burgerNode.classList.add('hide');
 		};
 		
 		function closeModal() {
@@ -107,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			topMenuNode.classList.remove('white');
 			topMenuNode.classList.add('scrolled');
 			document.body.classList.remove('blocked');
+			burgerNode.classList.remove('hide');
 		};
 
 		modalContentNode.innerHTML = quizItemsTmpl;
@@ -127,9 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const stepNodes = modalContentNode.querySelectorAll('.quiz-item'),
 		      phoneInputs = modalContentNode.querySelectorAll('input.phone'),
-		      smsDigitNodes = modalContentNode.querySelectorAll('.sms-digit');
+				smsDigitNodes = modalContentNode.querySelectorAll('.sms-digit'),
+				adressInputNode = modalContentNode.querySelector('input[name=adress]');
 		
-		setActiveStep(1);
+		setActiveStep(step);
 		
 		modalContentNode.addEventListener('click', function(e) {
 			e.preventDefault();
@@ -142,11 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
 				input.value = e.target.dataset.value;
 				let timerId = setTimeout(() => {
 					setActiveStep(currentStep+1);
+					if (currentStep === 3) setInterval(adressInputNode.focus(), 700);
 				}, 300); 
 			};
 			
 			if (e.target.dataset.step == "3") {
-				setActiveStep(currentStep+1);
+				setActiveStep(4);
+				setInterval(phoneInputs[1].focus(), 700);
 			};
 			
 			if (e.target.dataset.step == "4") {
@@ -165,13 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					isErrors = true;
 				}
 				if (!isErrors) {
-					setActiveStep(currentStep+1);
+					setActiveStep(5);
+					setInterval(smsDigitNodes[0].focus(), 700);
 				}
 			};
 
-			if (e.target.dataset.step == "5") {
-				setInterval(smsDigitNodes[0].focus(), 900);
-			};
 		});
 
 		smsDigitNodes.forEach((node,i) => {
@@ -205,6 +220,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log('checkSms()');
 		};
 	}
+
+	// Mobile menu
+	const topMenuNode = document.querySelector('.top-menu'),
+	      burgerNode = topMenuNode.querySelector('.top-menu__burger'),
+			topMenuItemsNode = topMenuNode.querySelector('.top-menu__items');
+			
+	burgerNode.addEventListener('click', function(e) {
+		e.preventDefault();
+		console.log('burger');
+		// topMenuItemsNode.classList.toggle('hidden');
+		topMenuNode.classList.toggle('mobile-active');
+		// burgerNode.classList.toggle('active');
+	});
+	
+	
 });
 
 

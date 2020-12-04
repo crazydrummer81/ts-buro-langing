@@ -2,9 +2,17 @@
 	width: 100%;
 	display: flex;
 	align-items: center;
-	overflow: hidden;
 	position: relative;
-	overflow: visible;
+	background-image: url(../img/decor/figure-01.png);
+	background-position: right 0 top 5%;
+	background-repeat: no-repeat;
+	background-size: 45%;
+	padding-bottom: 150%;
+	margin-bottom: -152%;
+	overflow-x: scroll;
+	&::-ms-scrollbar, &::-webkit-scrollbar, &::-moz-scrollbar {
+		display: none;
+	}
 
 	// .features__item
 
@@ -48,6 +56,7 @@
 		padding: 0 20px;
 		height: 313px;
 		width: 100%;
+		min-width: 1408px;
 		border: 1px solid #000;
 		border-radius: 200px;
 		// overflow: hidden;
@@ -69,17 +78,17 @@
 			border-left: 55px solid #000;
 		}
 	}
-	&::before {
-		content: "";
-		background-image: url(../img/decor/figure-01.png);
-		position: absolute;
-		right: 0;
-		top: 23%;
-		width: 44%;
-		height: 200%;
-		overflow: visible;
-		background-size: contain;
-		background-repeat: no-repeat;
-		z-index: -1;
-	}
+	// &::before {
+	// 	content: "";
+	// 	background-image: url(../img/decor/figure-01.png);
+	// 	position: absolute;
+	// 	right: 0;
+	// 	top: 23%;
+	// 	width: 44%;
+	// 	height: 200%;
+	// 	overflow: visible;
+	// 	background-size: contain;
+	// 	background-repeat: no-repeat;
+	// 	z-index: -1;
+	// }
 }

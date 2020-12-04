@@ -8,8 +8,11 @@
 		flex-direction: column;
 		justify-content: space-between;
 		max-width: 700px;
-		margin: auto;
+		margin: 0 auto;
 		z-index: 1;
+		@media (max-width:767.99px) {
+			margin-bottom: 2em;
+		}
 	}
 	.container {
 		width: 100%;
@@ -23,8 +26,11 @@
 		background-position: center;
 		max-width: 1373px;
 		margin: 0 auto;
-		padding: 0;
 		position: relative;
+		@media (max-width:767.99px) {
+			min-height: 100vh;
+			background-size: cover;	
+		}
 		&::before {
 			// Trick for proportional width
 			content: "";
@@ -43,21 +49,29 @@
 	// .contacts__content-title
 
 		&__content-title {
-		font-size: 53px;
-		font-weight: 900;
-		text-align: center;
-		position: absolute;
-		top: 10%;
+			font-size: 53px;
+			font-weight: 900;
+			text-align: center;
+			position: absolute;
+			top: 10%;
+			@media (max-width:767.99px) {
+				position: unset;
+				margin-bottom: 1.5em;
+			}
 	}
 
 	.button {
 		position: absolute;
 		bottom: 15%;
+		@media (max-width:767.99px) {
+			position: unset;
+		}
 	}
 
 	// .contacts__content-text
 
 	&__content-text {
+		margin-bottom: 1.5em;
 	}
 
 }

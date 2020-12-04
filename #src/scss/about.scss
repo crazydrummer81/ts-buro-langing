@@ -24,30 +24,21 @@
 		font-size: 30px;
 		line-height: 1.5em;
 		position: relative;
+		background-image: url(../img/decor/cube-01.png),
+		                  url(../img/decor/parallelepiped-01.png);
+			background-repeat: no-repeat, no-repeat;
+			background-size: 25%, 91%;
+			background-position: left 0 top 0, right -124px bottom -4%;
+		@media (max-width:767.99px) {
+			width: 100%;
+			padding: 20% 5%;
+			font-size: 24px;
+		}
 		p {
 			margin: 1.5em;
-		}
-		&::before {
-			content: "";
-			position: absolute;
-			top: 0; left: 0;
-			width: 25%; height: 25%;
-			background-image: url(../img/decor/cube-01.png);
-			background-repeat: no-repeat;
-			background-size: contain;
-		}
-		&::after {
-			content: "";
-			position: absolute;
-			right: 0;
-			bottom: 0;
-			width: 90%;
-			height: 90%;
-			background-image: url(../img/decor/parallelepiped-01.png);
-			background-repeat: no-repeat;
-			background-size: contain;
-			background-position: right bottom;
-			transform: translate(25%, 3%);
+			@media (max-width:767.99px) {
+				margin: 0;
+			}
 		}
 	}
 
@@ -60,6 +51,11 @@
 		grid-gap: 2%;
 		position: absolute;
 		top: 0; right: 0;
+		@media (max-width:767.99px) {
+			position: relative;	
+			width: 98%;
+			margin-top: -50px;
+		}
 	}
 
 	// .about__gallery-item
@@ -69,6 +65,12 @@
 		display: flex;
 		align-items: center; justify-content: center;
 		padding: 33%;
+		@media (max-width:767.99px) {
+			padding: 10%;
+		}
+		img {
+			width: 100%;
+		}
 
 		&::after {
 			content: "";

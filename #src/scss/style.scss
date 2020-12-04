@@ -36,9 +36,15 @@ body {
 .container.wide-padding-both {
 	// max-width: 1373px;
 	margin: auto 132px;
+	@media (max-width: 979.99px) {
+		margin: 0;
+	}
 }
 .container.wide-padding-left {
 	margin: auto 55px auto 132px;
+	@media (max-width: 979.99px) {
+		margin: 0;
+	}
 }
 .h2 {
 	font-size: 40px;

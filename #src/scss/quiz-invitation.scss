@@ -7,6 +7,20 @@
 	grid-template-areas: "img text gallery";
 	padding: 0;
 	color: #fff;
+	@media (max-width:979.99px) {
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas: "img text";
+		grid-gap: 1em;
+		padding: 0 20px;
+	}
+	@media (max-width:767.99px) {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr max-content;
+		grid-template-areas: "img" "text";
+		grid-gap: 1em;
+		padding: 0 20px;
+		height: auto;
+	}
 
 	// .quiz-invitation__image
 
@@ -15,12 +29,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: url(../img/balance-wheel.svg);
+		background-image: url(../img/balance-wheel.svg);
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
 		width: 100%;
 		margin: 42px auto;
+		min-height: 310px;
+		@media (max-width:767.99px) {
+			margin: 30px auto;
+			// padding: 30px 0;
+		}
 	}
 
 	// .quiz-invitation__text
@@ -31,14 +50,24 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: start;
+		@media (max-width:767.99px) {
+			align-items: center;
+			text-align: center;
+			padding-bottom: 2em;
+		}
 	}
 
 	// .quiz-invitation__text-title
 
 	&__text-title {
-		font-size: 48px;
+		font-size: 40px;
 		font-weight: 900;
 		margin-bottom: .5em;
+		@media (max-width:767.99px) {
+			align-items: center;
+			text-align: center;
+			font-size: 36px;
+		}
 	}
 
 	// .quiz-invitation__text-content
@@ -62,6 +91,9 @@
 									"cell3 cell4"
 									"cell5 cell6"
 									"cell7 cell8";
+		@media (max-width:979.99px) {
+			display: none;
+		}
 		img {
 			width: 100%;
 		}
@@ -71,19 +103,19 @@
 			background-repeat: no-repeat;
 		}
 		.quiz-invitation__gallery-item:nth-child(1) {
-			background: url(../img/quiz-invitation/quiz-invitation-1.png);
+			background-image: url(../img/quiz-invitation/quiz-invitation-1.png);
 			grid-area: cell1;
 		}
 		.quiz-invitation__gallery-item:nth-child(2) {
-			background: url(../img/quiz-invitation/quiz-invitation-2.png);
+			background-image: url(../img/quiz-invitation/quiz-invitation-2.png);
 			grid-area: cell4;
 		}
 		.quiz-invitation__gallery-item:nth-child(3) {
-			background: url(../img/quiz-invitation/quiz-invitation-3.png);
+			background-image: url(../img/quiz-invitation/quiz-invitation-3.png);
 			grid-area: cell6;
 		}
 		.quiz-invitation__gallery-item:nth-child(4) {
-			background: url(../img/quiz-invitation/quiz-invitation-4.png);
+			background-image: url(../img/quiz-invitation/quiz-invitation-4.png);
 			grid-area: cell7;
 		}
 	}
