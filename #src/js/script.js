@@ -18,8 +18,8 @@ const quizItemsTmpl =
 <div class="quiz-item">
 	<div class="quiz-item__title">Тип помещения</div>
 	<div class="quiz-item__content nowrap">
-		<div class="button"><a href="#" data-value="new" data-step="2">Новостройка</a></div>
-		<div class="button"><a href="#" data-value="seconadary" data-step="2">Вторичка</a></div>
+		<div class="button"><a href="#" data-value="Новостройка" data-step="2">Новостройка</a></div>
+		<div class="button"><a href="#" data-value="Вторичка" data-step="2">Вторичка</a></div>
 		<input type="hidden" name="premises-type">
 	</div>
 </div>
@@ -78,15 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		button.addEventListener('click', function(e) {
 			e.preventDefault();
 			let step = 1, roomsCount = null;
-			console.log('roomsCount', roomsCount);
 
 			if (e.target.dataset.target === 'quiz2') {
-				roomsCount = flatTypeSelect.value;
+				if (e.target.dataset.roomsCount) {
+					roomsCount = e.target.dataset.roomsCount;
+				} else if (flatTypeSelect.value) {
+					roomsCount = flatTypeSelect.value;
+				}
 				step = 2;
 			};
 			if (e.target.dataset.target === 'quiz4') {
 				step = 4;
 			};
+			console.log('roomsCount', roomsCount);
 			runQuiz(step, roomsCount);
 			
 		});
@@ -124,25 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 
 		modalContentNode.innerHTML = quizItemsTmpl;
-		// const modalNavWrap = modalNode.querySelector('.modal__nav');
-		// modalNavWrap.addEventListener('click', function(e) {
-		// 	e.preventDefault();
-		// 	if (e.target.classList.contains('modal__nav-prev')) {
-		// 		if (currentStep > 1) {
-		// 			setActiveStep(currentStep - 1);
-		// 		}
-		// 	}
-		// 	if (e.target.classList.contains('modal__nav-next')) {
-		// 		if (currentStep < 5) {
-		// 			setActiveStep(currentStep + 1);
-		// 		}
-		// 	}
-		// });
 
 		const stepNodes = modalContentNode.querySelectorAll('.quiz-item'),
 		      phoneInputs = modalContentNode.querySelectorAll('input.phone'),
 				smsDigitNodes = modalContentNode.querySelectorAll('.sms-digit'),
-				adressInputNode = modalContentNode.querySelector('input[name=adress]');
+				roomsNumberInputNode = modalContentNode.querySelector('input[name="rooms-number"]'), //Количество комнат
+				premisesTypeInputNode = modalContentNode.querySelector('input[name="premises-type"]'), //Тип помещения
+				adressInputNode = modalContentNode.querySelector('input[name="adress"]'); // Адрес объекта
+
+		roomsNumberInputNode.value = roomsCount;
 		
 		setActiveStep(step);
 		
@@ -157,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				input.value = e.target.dataset.value;
 				let timerId = setTimeout(() => {
 					setActiveStep(currentStep+1);
-					if (currentStep === 3) setInterval(adressInputNode.focus(), 700);
+					if (currentStep === 3) { setInterval(adressInputNode.focus(), 700); }
 				}, 300); 
 			};
 			
@@ -182,9 +176,35 @@ document.addEventListener('DOMContentLoaded', () => {
 					isErrors = true;
 				}
 				if (!isErrors) {
-					setActiveStep(5);
-					setInterval(smsDigitNodes[0].focus(), 700);
+					// Отправка почты
+					const formWrapperNode = modalContentNode.querySelector('.quiz-item.active');
+					submit({
+						'Количество комнат': roomsNumberInputNode.value || '',
+						'Тип квартиры': premisesTypeInputNode.value || '',
+						'Адрес объекта': adressInputNode.value || '',
+						'Телефон': (phoneInputs[0].value + phoneInputs[1].value) || ''
+					}, formWrapperNode)
+					.then(data => {
+						console.log(data);
+						if (data.ok) {
+							outputResutlMessage('ok', formWrapperNode);
+							setTimeout(closeModal, 5000);
+						} else {
+							outputResutlMessage('fail', formWrapperNode);
+							setTimeout(closeModal, 15000);
+						};
+					})
+					.catch((e) => {
+						console.log('Ошибка сервера', e);
+						outputResutlMessage('fail', formWrapperNode);
+						setTimeout(closeModal, 15000);
+					});
+					// Далее по макету есть проверка номера по СМС, но этот функционал пока не нужен
+					// setActiveStep(5);
+					// setInterval(smsDigitNodes[0].focus(), 700);
 				}
+
+
 			};
 
 		});
@@ -197,10 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				console.log('digitId',digitId);
 				if (e.key.match(/\d/)) {
 					e.target.value = e.key;
-					if (digitId < smsDigitNodes.length)
+					if (digitId < smsDigitNodes.length) {
 						smsDigitNodes[i+1].focus();
-					if (digitId == smsDigitNodes.length)
+					}
+					if (digitId == smsDigitNodes.length) {
 						checkSms();
+					}
 				} else {
 					e.target.value = '';
 				}
@@ -233,8 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		topMenuNode.classList.toggle('mobile-active');
 		// burgerNode.classList.toggle('active');
 	});
-	
-	
+
+	smoothScrollActivate();
 });
 
 
@@ -257,3 +279,94 @@ testWebP(function (support) {
 });
 
 
+function smoothScrollActivate() {
+	console.log('smoothScrollActivate()');
+	const links = [...document.querySelectorAll('a')].filter(link => {
+		const href = link.getAttribute('href');
+		return href.length > 2 && href.indexOf('#popup') < 0 && href.indexOf('#') >= 0;
+	});
+	links.forEach(link => {
+		link.addEventListener('click', function(e) {
+			e.preventDefault();
+			console.log(link.getAttribute('href'));
+			smoothScrollTo(document.querySelector(link.getAttribute('href')));
+		});
+	});
+	
+	function smoothScrollTo(targetNode) {
+		const currentTop = window.scrollY;
+		const targetTop = targetNode.getBoundingClientRect().top;
+				
+		console.log('targetTop', targetTop);
+		console.log('currentTop', currentTop);
+
+		window.scrollBy({
+			top: targetTop,
+			behavior: 'smooth'
+		 });
+	}
+};
+
+async function submit(data = {}, loaderParentNode = undefined) {
+	console.log('submit', JSON.stringify(data));
+	addLoader(loaderParentNode);
+	const url = '/ajax/order.php';
+	const response = await fetchWithTimeout(url, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify(data)
+	}, 5000);
+	
+	const res = await response.json();
+	console.log(res);
+	return res;
+};
+
+function addLoader(parentNode) {
+	console.log('addLoader(parentNode) parentNode', parentNode);
+	const loader = document.createElement('div');
+	loader.classList.add('loader');
+	parentNode.append(loader);
+	parentNode.style.position = 'relative';
+	loader.style.cssText  = `
+		position: absolute;
+		inset: 0;
+		background-color: rgba(255,255,255,0.8);
+		background-image: url(../img/loader.gif);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 20%;
+	`;
+	return loader;
+};
+
+function outputResutlMessage(result = 'ok', parentNode) {
+	const okHTML = `
+		<div class="message ok">Спасибо, мы получили вашу заявку и свяжемся с вами в самое ближайшее время...</div>
+	`;
+	const failHTML = `
+		<div class="message fail">
+			<p>Что-то пошло не так, и мы, вероятно, не получили вашу заявку.</p>
+			<p>Наши разработчики уже в курсе и работают над устранением этой ошибки.</p>
+			<p>Пожалуйста, <a href="tel:+77077770720">позвоните нам</a>, мы обязательно вам поможем.</p>
+			<p><a href="tel:+77077770720">+7&nbsp;707&nbsp;777&nbsp;0720</a></p>
+		</div>
+	`;
+	if (result === 'ok') {
+		parentNode.innerHTML = okHTML;
+	} else {
+		parentNode.innerHTML = failHTML;
+	};
+	return result === 'ok';
+};
+
+function fetchWithTimeout (url, options, timeout = 7000) {
+	return Promise.race([
+		 fetch(url, options),
+		 new Promise((_, reject) =>
+			  setTimeout(() => reject(new Error('timeout')), timeout)
+		 )
+	]);
+}

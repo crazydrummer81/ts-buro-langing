@@ -10,7 +10,13 @@
 	padding-bottom: 150%;
 	margin-bottom: -152%;
 	overflow-x: scroll;
-	&::-ms-scrollbar, &::-webkit-scrollbar, &::-moz-scrollbar {
+	&::-ms-scrollbar {
+		display: none;
+	}
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	&::-moz-scrollbar {
 		display: none;
 	}
 

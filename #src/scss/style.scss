@@ -75,6 +75,21 @@ body {
 .dropdown {
 	display: flex;
 }
+.message {
+	font-size: 18px;
+	text-align: center;
+	line-height: 1.5em;
+}
+.message a {
+	text-decoration: underline;
+	font-weight: bold;
+}
+.message.fail {
+	color: red;
+}
+.message.ok {
+	color: green;
+}
 
 @import "top-menu";
 @import "hero";
