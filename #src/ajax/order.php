@@ -14,18 +14,9 @@
 		$message .= html_table_row($key, $value);
 	});
 
-	// Запись в лог
-	try {
-		file_put_contents($log_filename, json_encode($post, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)."\n\n", FILE_APPEND);
-	} catch (Exception $e) {
-		$res['Ошибки скрипта order.php'][] = $e->getMessage();
-	}
-	
-
 	// Отправка e-mail
 	$subject = "ts-buro.com | Новая заявка с сайта";
-	$to = 'mansutmamirov@gmail.com';
-
+	$to_emails = ['mansurmamirov@gmail.com', 'hello@t-setters.com'];
 
 	// Заголовки для HTML-письма
 	$headers = [];
@@ -44,7 +35,7 @@
 		</head>
 		<body>
 			<h2>Новая заявка с сайта ts-buro.com</h2>
-			<table style=\"width:260px; border:none;\">";
+			<table cellspacing=\"0\" cellpadding=\"0\" style=\"width:310px; border:none;\">";
 
 	$body = $message;
 
@@ -54,25 +45,33 @@
 
 $res = [];
 $res['Дата'] = $date;
+
+$to = join(', ', $to_emails);
 try {
 	$res['ok'] = mail($to, $subject, $header.$body.$footer, implode("\r\n", $headers));
 } catch (Exception $e) {
 	$res['Ошибки скрипта order.php'][] = $e->getMessage();
-}
+};
 
 $res['post'] = $post;
 
-	sleep(1);
-	echo json_encode($res, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+// sleep(1);
+// Запись в лог
+try {
+	file_put_contents($log_filename, json_encode($post, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)."\n\n", FILE_APPEND);
+} catch (Exception $e) {
+	$res['Ошибки скрипта order.php'][] = $e->getMessage();
+}
+echo json_encode($res, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
 
-	function safe_html(&$item, $key) {
-   	$item = htmlspecialchars($item);
-	};
-
-	function html_table_row(&$item, $key) {
-		return "<tr><td style=\"padding: 10px; border: 1px solid #eeeeee;\">$key</td><td>$item</td></tr>";
-	};
 
 
+function safe_html(&$item, $key) {
+	$item = htmlspecialchars($item);
+};
+
+function html_table_row(&$item, $key) {
+	return "<tr><td style=\"padding: 10px; border: 1px solid #eeeeee;\">$key</td><td style=\"padding: 10px; border: 1px solid #eeeeee;\">$item</td></tr>";
+};
 ?>
