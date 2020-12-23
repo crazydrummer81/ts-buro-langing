@@ -15,8 +15,8 @@
 	});
 
 	// Отправка e-mail
-	$subject = "ts-buro.com | Новая заявка с сайта";
-	$to_emails = ['mansurmamirov@gmail.com', 'hello@t-setters.com'];
+	$subject = "tsburo.com | Новая заявка с сайта";
+	$to_emails = ['mansurmamirov@gmail.com', 'hello@tsburo.com'];
 
 	// Заголовки для HTML-письма
 	$headers = [];
@@ -31,10 +31,10 @@
 
 	$header = "<html>
 		<head>
-			<title>ts-buro.com | Новая заявка с сайта</title>
+			<title>ts	buro.com | Новая заявка с сайта</title>
 		</head>
 		<body>
-			<h2>Новая заявка с сайта ts-buro.com</h2>
+			<h2>Новая заявка с сайта tsburo.com</h2>
 			<table cellspacing=\"0\" cellpadding=\"0\" style=\"width:310px; border:none;\">";
 
 	$body = $message;
@@ -72,6 +72,6 @@ function safe_html(&$item, $key) {
 };
 
 function html_table_row(&$item, $key) {
-	return "<tr><td style=\"padding: 10px; border: 1px solid #eeeeee;\">$key</td><td style=\"padding: 10px; border: 1px solid #eeeeee;\">$item</td></tr>";
+	return "<tr><td style=\"padding: 10px; border: 1px solid #eeeeee;\">$item</td><td style=\"padding: 10px; border: 1px solid #eeeeee;\">$key</td></tr>";
 };
 ?>

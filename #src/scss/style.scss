@@ -52,6 +52,13 @@ body {
 	text-align: center;
 	margin-bottom: 1.75em;
 }
+a {
+	transition: all .6s ease;
+}
+a:hover {
+	color: var(--orange);
+	transition: all .6s ease;
+}
 .button {
 	display: flex;
 	justify-content: space-between;
