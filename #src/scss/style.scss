@@ -70,6 +70,12 @@ a:hover {
 		background: var(--orange);
 		color: #fff;
 		display: block;
+		transition: all .6s ease;
+	}
+	a:hover {
+		background-color: #fff;
+		color: var(--orange);
+		transition: all .6s ease;
 	}
 }
 .btn-white {
@@ -77,6 +83,12 @@ a:hover {
 		background-color: #fff;
 		color: var(--orange);
 		font-weight: 600;
+		transition: all .6s ease;
+	}
+	a:hover {
+		color: #fff;
+		background-color: var(--orange);
+		transition: all .6s ease;
 	}
 }
 .dropdown {
