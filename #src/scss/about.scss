@@ -45,15 +45,17 @@
 	// .about__gallery
 
 	&__gallery {
+		--gap: 15px;
 		display: grid;
 		width: 56%;
 		grid-template-columns: repeat(2, 50%);
-		grid-gap: 2%;
+		grid-gap: var(--gap);
 		position: absolute;
-		top: 0; right: 0;
+		top: 0; right: var(--gap);
 		@media (max-width:767.99px) {
+			right: 0;
 			position: relative;	
-			width: 98%;
+			width: calc(100% - var(--gap));
 			margin-top: -50px;
 		}
 	}
@@ -80,11 +82,17 @@
 				font-size: 36px;
 				text-transform: uppercase;
 				font-weight: 700;				
+				@media (max-width:575.99px) {
+					font-size: 26px;
+				}
 			}
 	
 			&-desc {
 				font-size: 22px;
 				font-weight: 700;
+				@media (max-width:575.99px) {
+					font-size: 18px;
+				}
 			}
 		}
 
