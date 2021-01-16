@@ -96,36 +96,37 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
+	const modalNode =        document.getElementById('modal-quiz'),
+			modalContentNode = modalNode.querySelector('.modal__content'),
+			modalCloseButton = modalNode.querySelector('.button-close'),
+			topMenuNode =      document.querySelector('.top-menu'),
+			burgerNode =       topMenuNode.querySelector('.top-menu__burger');
+
+	function openModal() {
+		document.body.classList.add('blocked');
+		modalNode.classList.add('active');
+		console.dir(topMenuNode);
+		topMenuNode.classList.remove('scrolled');
+		topMenuNode.classList.add('white');
+		burgerNode.classList.add('hide');
+	};
+	
+	function closeModal() {
+		modalContentNode.innerHTML = '';
+		modalNode.classList.remove('active');
+		topMenuNode.classList.remove('white');
+		topMenuNode.classList.add('scrolled');
+		document.body.classList.remove('blocked');
+		burgerNode.classList.remove('hide');
+	};
 
 	function runQuiz(step = 1, roomsCount = null) {
 		console.log('runQuiz');
-		const modalNode =        document.getElementById('modal-quiz'),
-				modalContentNode = modalNode.querySelector('.modal__content'),
-				modalCloseButton = modalNode.querySelector('.button-close'),
-				topMenuNode =      document.querySelector('.top-menu'),
-				burgerNode =       topMenuNode.querySelector('.top-menu__burger');
 		let currentStep = 1;
 
 		modalCloseButton.addEventListener('click', closeModal);
 		openModal();
 
-		function openModal() {
-			document.body.classList.add('blocked');
-			modalNode.classList.add('active');
-			console.dir(topMenuNode);
-			topMenuNode.classList.remove('scrolled');
-			topMenuNode.classList.add('white');
-			burgerNode.classList.add('hide');
-		};
-		
-		function closeModal() {
-			modalContentNode.innerHTML = '';
-			modalNode.classList.remove('active');
-			topMenuNode.classList.remove('white');
-			topMenuNode.classList.add('scrolled');
-			document.body.classList.remove('blocked');
-			burgerNode.classList.remove('hide');
-		};
 
 		modalContentNode.innerHTML = quizItemsTmpl;
 
@@ -244,8 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// Mobile menu
-	const topMenuNode = document.querySelector('.top-menu'),
-	      burgerNode = topMenuNode.querySelector('.top-menu__burger'),
+	const //topMenuNode = document.querySelector('.top-menu'),
+	      //burgerNode = topMenuNode.querySelector('.top-menu__burger'),
 			topMenuItemsNode = topMenuNode.querySelector('.top-menu__items');
 			
 	burgerNode.addEventListener('click', function(e) {
@@ -257,6 +258,34 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	smoothScrollActivate();
+	function smoothScrollActivate() {
+		console.log('smoothScrollActivate()');
+		const links = [...document.querySelectorAll('a')].filter(link => {
+			const href = link.getAttribute('href');
+			return href.length > 2 && href.indexOf('#popup') < 0 && href.indexOf('#') >= 0;
+		});
+		links.forEach(link => {
+			link.addEventListener('click', function(e) {
+				e.preventDefault();
+				console.log(link.getAttribute('href'));
+				smoothScrollTo(document.querySelector(link.getAttribute('href')));
+			});
+		});
+		
+		function smoothScrollTo(targetNode) {
+			closeModal();
+			const currentTop = window.scrollY;
+			const targetTop = targetNode.getBoundingClientRect().top;
+					
+			console.log('targetTop', targetTop);
+			console.log('currentTop', currentTop);
+	
+			window.scrollBy({
+				top: targetTop,
+				behavior: 'smooth'
+			 });
+		}
+	};
 });
 
 
@@ -279,33 +308,7 @@ testWebP(function (support) {
 });
 
 
-function smoothScrollActivate() {
-	console.log('smoothScrollActivate()');
-	const links = [...document.querySelectorAll('a')].filter(link => {
-		const href = link.getAttribute('href');
-		return href.length > 2 && href.indexOf('#popup') < 0 && href.indexOf('#') >= 0;
-	});
-	links.forEach(link => {
-		link.addEventListener('click', function(e) {
-			e.preventDefault();
-			console.log(link.getAttribute('href'));
-			smoothScrollTo(document.querySelector(link.getAttribute('href')));
-		});
-	});
-	
-	function smoothScrollTo(targetNode) {
-		const currentTop = window.scrollY;
-		const targetTop = targetNode.getBoundingClientRect().top;
-				
-		console.log('targetTop', targetTop);
-		console.log('currentTop', currentTop);
 
-		window.scrollBy({
-			top: targetTop,
-			behavior: 'smooth'
-		 });
-	}
-};
 
 async function submit(data = {}, loaderParentNode = undefined) {
 	console.log('submit', JSON.stringify(data));
