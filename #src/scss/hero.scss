@@ -14,6 +14,9 @@
 		background-color: rgba(0,0,0,.5);
 		content: "";
 	}
+	@media (max-width:768px) {
+		height: auto;
+	}
 
 	// .hero__title
 

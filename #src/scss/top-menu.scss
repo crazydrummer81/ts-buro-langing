@@ -73,6 +73,18 @@
 		img {
 			width: 100%;
 		}
+		@media (max-width:374px) {
+			width: 73px;
+			margin-top: 35px;
+		}
+	}
+	&.scrolled .top-menu__logo-img {
+		@media (max-width:374px) {
+			width: 50px;
+			max-width: 50px;
+			min-width: 50px;
+			margin-top: 10px;
+		}
 	}
 
 	&.white {
