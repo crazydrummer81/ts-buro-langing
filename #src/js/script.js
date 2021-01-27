@@ -1,60 +1,60 @@
 'use strict';
 
 const quizItemsTmpl = 
-	`
-	<form id="quiz">
+`
+<form id="quiz">
 	<div class="quiz-item">
-	<div class="quiz-item__title">Рассчитайте стоимость проекта Какая у Вас квартира?</div>
-	<div class="quiz-item__content">
-		<div class="button"><a href="#" data-value="1" data-step="1">1 комнатная/студия</a></div>
-		<div class="button"><a href="#" data-value="2" data-step="1">2 комнатная</a></div>
-		<div class="button"><a href="#" data-value="3" data-step="1">3 комнатная</a></div>
-		<div class="button"><a href="#" data-value="4" data-step="1">4 комнатная</a></div>
-		<div class="button"><a href="#" data-value="0" data-step="1">Другое</a></div>
-		<input type="hidden" name="rooms-number">
-	</div>
-</div>
-
-<div class="quiz-item">
-	<div class="quiz-item__title">Тип помещения</div>
-	<div class="quiz-item__content nowrap">
-		<div class="button"><a href="#" data-value="Новостройка" data-step="2">Новостройка</a></div>
-		<div class="button"><a href="#" data-value="Вторичка" data-step="2">Вторичка</a></div>
-		<input type="hidden" name="premises-type">
-	</div>
-</div>
-
-<div class="quiz-item">
-	<div class="quiz-item__title">Название ЖК или адрес</div>
-	<div class="quiz-item__content">
-		<input type="text" name="adress" id="" placeholder="Необязательно">
-		<div class="button"><a href="#" data-step="3">Продолжить</a></div>
-	</div>
-</div>
-
-<div class="quiz-item">
-	<div class="quiz-item__title">Ваш телефон</div>
-	<div class="quiz-item__content">
-		<div class="phone-input-wrapper">
-			<input type="text" name="phone-code" class="phone" placeholder="+7" required value="+7">
-			<input type="text" name="phone-number" class="phone" placeholder="(XXX) XXX XX XX" required>
-			<div class="button disabled"><a href="#" data-step="4">Продолжить</a></div>
+		<div class="quiz-item__title">Рассчитайте стоимость проекта Какая у Вас квартира?</div>
+		<div class="quiz-item__content">
+			<div class="button"><a href="#" data-value="1" data-step="1">1 комнатная/студия</a></div>
+			<div class="button"><a href="#" data-value="2" data-step="1">2 комнатная</a></div>
+			<div class="button"><a href="#" data-value="3" data-step="1">3 комнатная</a></div>
+			<div class="button"><a href="#" data-value="4" data-step="1">4 комнатная</a></div>
+			<div class="button"><a href="#" data-value="0" data-step="1">Другое</a></div>
+			<input type="hidden" name="rooms-number">
 		</div>
 	</div>
-</div>
 
-<div class="quiz-item">
-	<div class="quiz-item__title">Код из СМС</div>
-	<div class="quiz-item__content">
-		<input type="text" name="sms-code-1" class="sms-digit" placeholder="X">
-		<input type="text" name="sms-code-2" class="sms-digit" placeholder="X">
-		<input type="text" name="sms-code-3" class="sms-digit" placeholder="X">
-		<input type="text" name="sms-code-4" class="sms-digit" placeholder="X">
-		<div class="quiz-item__message"></div>
+	<div class="quiz-item">
+		<div class="quiz-item__title">Тип помещения</div>
+		<div class="quiz-item__content nowrap">
+			<div class="button"><a href="#" data-value="Новостройка" data-step="2">Новостройка</a></div>
+			<div class="button"><a href="#" data-value="Вторичка" data-step="2">Вторичка</a></div>
+			<input type="hidden" name="premises-type">
+		</div>
 	</div>
-</div>
+
+	<div class="quiz-item">
+		<div class="quiz-item__title">Название ЖК или адрес</div>
+		<div class="quiz-item__content">
+			<input type="text" name="adress" id="" placeholder="Необязательно">
+			<div class="button"><a href="#" data-step="3">Продолжить</a></div>
+		</div>
+	</div>
+
+	<div class="quiz-item">
+		<div class="quiz-item__title">Ваш телефон</div>
+		<div class="quiz-item__content">
+			<div class="phone-input-wrapper">
+				<input type="text" name="phone-code" class="phone" placeholder="+7" required value="+7">
+				<input type="text" name="phone-number" class="phone" placeholder="(XXX) XXX XX XX" required>
+				<div class="button disabled"><a href="#" data-step="4">Продолжить</a></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="quiz-item">
+		<div class="quiz-item__title">Код из СМС</div>
+		<div class="quiz-item__content">
+			<input type="text" name="sms-code-1" class="sms-digit" placeholder="X">
+			<input type="text" name="sms-code-2" class="sms-digit" placeholder="X">
+			<input type="text" name="sms-code-3" class="sms-digit" placeholder="X">
+			<input type="text" name="sms-code-4" class="sms-digit" placeholder="X">
+			<div class="quiz-item__message"></div>
+		</div>
+	</div>
 </form>
-	`;
+`;
 
 document.addEventListener('DOMContentLoaded', () => {
 	window.addEventListener('scroll', function(e) {
@@ -106,9 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.body.classList.add('blocked');
 		modalNode.classList.add('active');
 		console.dir(topMenuNode);
-		topMenuNode.classList.remove('scrolled');
+		topMenuNode.classList.remove('scrolled', 'mobile-active');
 		topMenuNode.classList.add('white');
 		burgerNode.classList.add('hide');
+
 	};
 	
 	function closeModal() {
